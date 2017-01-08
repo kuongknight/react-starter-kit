@@ -32,6 +32,8 @@ async function copy() {
     copyDir('src/content', 'build/content'),
     copyDir('public', 'build/public'),
     copyDir('src/messages', 'build/messages'),
+    copyDir('node_modules/bootstrap/dist/css', 'build/public/css'),
+    copyDir('node_modules/bootstrap/dist/fonts', 'build/public/fonts'),
   ]);
 
   if (process.argv.includes('--watch')) {
