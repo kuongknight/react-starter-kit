@@ -33,7 +33,7 @@ export function getContent({ path, locale, force }) {
         return true;
       }
     }
-
+    console.log('dispatch FETCH_CONTENT_START');
     dispatch({
       type: FETCH_CONTENT_START,
       payload,

@@ -1,13 +1,15 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 import rootReducer from '../reducers';
 import createHelpers from './createHelpers';
 import createLogger from './logger';
+import sagas from '../sagas';
 
 export default function configureStore(initialState, helpersConfig) {
   const helpers = createHelpers(helpersConfig);
-  const middleware = [thunk.withExtraArgument(helpers)];
-
+  const sagaMiddleware = createSagaMiddleware();
+  const middleware = [thunk.withExtraArgument(helpers), sagaMiddleware];
   let enhancer;
 
   if (__DEV__) {
@@ -37,6 +39,9 @@ export default function configureStore(initialState, helpersConfig) {
       store.replaceReducer(require('../reducers').default),
     );
   }
-
+  store.runSaga = () => {
+    sagaMiddleware.run(sagas, helpers);
+    return store;
+  };
   return store;
 }

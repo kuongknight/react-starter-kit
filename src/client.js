@@ -23,7 +23,7 @@ import { ErrorReporter, deepForceUpdate } from './core/devUtils';
 
 [en, cs].forEach(addLocaleData);
 
-const store = configureStore(window.APP_STATE, { history });
+const store = configureStore(window.APP_STATE, { history }).runSaga();
 // Global (context) variables that can be easily accessed from any React component
 // https://facebook.github.io/react/docs/context.html
 const context = {
