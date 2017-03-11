@@ -1,4 +1,4 @@
-import { takeEvery } from 'redux-saga/effects';
+import { takeLatest } from 'redux-saga/effects';
 import { FETCH_CONTENT_START } from '../constants';
 
 
@@ -17,5 +17,5 @@ export function* fetchContents(helpers) {
  */
 export function* watchFetchContents(helpers) {
   console.log('aaaaaaaaaaaaaaa', helpers);
-  yield takeEvery(FETCH_CONTENT_START, fetchContents);
+  yield takeLatest(FETCH_CONTENT_START, fetchContents, helpers);
 }
